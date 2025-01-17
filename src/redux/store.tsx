@@ -3,7 +3,7 @@ import userReducer from "../redux/userSlice";
 
 export const store = configureStore({
   reducer: {
-    users: userReducer, // Properly add the counterReducer here
+    countries: userReducer, // Properly add the counterReducer here
   },
 });
 

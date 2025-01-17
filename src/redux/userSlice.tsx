@@ -1,10 +1,34 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 
 // Define the type for the state
+
+interface Country{
+  country: CountryItem
+}
+interface CountryItem {
+  capital : string;
+  continent: string;
+  covid19 : {last_updated: string, total_case: string, total_deaths: string},
+  currency: string;
+  current_president: {name: string; appointment_end_date : string | null; appointment_start_date: string | null; gender:string | null; href: {country: string; 
+    picture: string; self: string}
+  };
+  description: string;
+  full_name: string;
+  href: {self: string; picture: string; country: string; flag: string; presidents: string; states: string};
+  independence_date: string;
+  iso2: string;
+  iso3: string;
+  name: string;
+  phone_code: string;
+  population: string;
+  size: string;
+}
+
 interface CountryState {
   loading: boolean;
   error: string | null;
-  countries: string[];
+  countries: Country[];
 }
 
 // Initial state
@@ -15,10 +39,23 @@ const initialState: CountryState = {
 };
 
 // Async thunk for fetching users
-export const fetchCountries = createAsyncThunk<string[]>("countries/fetchCountries", async () => {
-  const response = await fetch("https://0f93707a-8313-4ece-9ace-dd41e41e6ae0-00-r4k6klm1d7py.sisko.replit.dev/countries/");
-  const data = await response.json();
+export const fetchCountries = createAsyncThunk<Country[]>("countries/fetchCountries", async () => {
+  const response = await fetch("https://93e82930-6fa7-4bbd-9b80-821ecfd2655c-00-3v33z4yab0pu9.pike.replit.dev/countries", 
+  {  method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    });
+  console.log(2222, response) 
+  let data, countries; 
+  try{
+  data = await response.json();
+  //countries = data.data;
   console.log(1111, data);
+  }
+  catch(error){
+    console.log(2222, error)
+  }
   return data; // This should return an array of strings (country names)
   //return data.map((user: { name: string }) => user.name); // Return only user names
 });
@@ -34,7 +71,7 @@ const userSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
-      .addCase(fetchCountries.fulfilled, (state, action: PayloadAction<string[]>) => {
+      .addCase(fetchCountries.fulfilled, (state, action: PayloadAction<Country[]>) => {
         state.loading = false;
         state.countries = action.payload;
       })
