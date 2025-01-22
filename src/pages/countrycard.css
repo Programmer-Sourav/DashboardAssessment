@@ -1,0 +1,12 @@
+.country-card{
+    border: 1px solid bisque;
+    background-color: beige;
+    margin: 16sp;
+    font-size: 16px;
+    font-weight: 500;
+    width: 1024px;
+}
+.low-pad{
+    padding: -8px;
+    margin: -4px;
+}

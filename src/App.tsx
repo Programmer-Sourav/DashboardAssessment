@@ -1,17 +1,22 @@
 // App.tsx
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { AppDispatch, RootState } from "./redux/store";
-
-import { fetchCountries } from "./redux/userSlice";
 import CountriesList from "./pages/CountriesList";
+import { Route, Routes } from "react-router";
+import CountryDetails from "./pages/CountryDetails";
+import SearchCountries from "./pages/SearchCountries";
 
 const App: React.FC = () => {
 
 
   return (
     <div style={{ textAlign: "center", marginTop: "50px" }}>
-     <CountriesList/>
+     <Routes>
+      <Route path="/" element={<CountriesList/>}/>
+      <Route path="/home" element={<CountriesList/>}/>
+      <Route path="/details/:id" element={<CountryDetails/>}/>
+      <Route path="/search" element={<SearchCountries/>}/>
+     </Routes>
+     {/* <CountriesList/> */}
     </div>
   );
 };
