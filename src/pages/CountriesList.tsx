@@ -92,6 +92,10 @@ console.log(5555, filteredValue)
     return(
     <>
     <div>
+      <div  className="linkbody">
+      <Link to="/">Home</Link>
+      <Link to="/search">Search Countries</Link>
+      </div>
     <label>Filter By Region: </label>
     <input type="search" value={filterValue} placeholder="Filter by region... " onChange={(e)=>{onFilterChange(e)}} className="searchbox"/>
     <button onClick={()=>{filterOnButtonClick()}}>Filter</button>

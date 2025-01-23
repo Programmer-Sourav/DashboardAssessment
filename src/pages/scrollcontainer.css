@@ -28,3 +28,9 @@
     padding-left: 8px;
     margin: 8px;
 }
+.linkbody{
+  display: flex;
+  height: 80px;
+  justify-content: space-around;
+  align-content: center;
+}
