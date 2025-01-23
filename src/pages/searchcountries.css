@@ -1,0 +1,13 @@
+.searchbox{
+    border: 1px solid gray;
+    width: 320px;
+    height: 40px;
+    padding-left: 8px;
+}
+.selectbox{
+    border: 1px solid gray;
+    width: 128px;
+    height: 40px;
+    padding-left: 8px;
+    margin: 8px;
+}

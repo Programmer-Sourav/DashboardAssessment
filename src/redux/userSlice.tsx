@@ -226,6 +226,77 @@ interface Search{
   searchResult: SearchItem
 }
 
+
+export const fetchSearchResultsByCapital = createAsyncThunk<SearchItem[], SearchParams>(
+  "countries/fetchSearchResultByCapital",
+  async ({ searchValue }, { rejectWithValue }) => {
+   try {
+       const response = await fetch(
+        `http://35.173.230.235:3000/countries/search/capital/${searchValue}`,
+           //`http://35.173.230.235:3000/countries/search?capital=${searchValue}`,
+           {
+               method: "GET",
+               headers: {
+                   "Content-Type": "application/json",
+               },
+           }
+       );
+
+       if (!response.ok) {
+           throw new Error(`HTTP error! status: ${response.status}`);
+       }
+
+       const data = await response.json();
+       console.log(7777, data);
+       // Validate response
+       // if (!Array.isArray(data)) {
+       //     throw new Error("Invalid response format");
+       // }
+       console.log(999999, data as SearchItem[])
+       return data as SearchItem[];
+   } catch (error) {
+       return rejectWithValue(
+           error instanceof Error ? error.message : "Unknown error"
+       );
+   }
+}
+);
+
+export const fetchSearchResultsByRegion = createAsyncThunk<SearchItem[], SearchParams>(
+  "countries/fetchSearchResultByRegion",
+  async ({ searchValue }, { rejectWithValue }) => {
+   try {
+       const response = await fetch(
+          //  `http://35.173.230.235:3000/countries/search?region=${searchValue}`,
+          `http://35.173.230.235:3000/countries/search/region/${searchValue}`,
+           {
+               method: "GET",
+               headers: {
+                   "Content-Type": "application/json",
+               },
+           }
+       );
+
+       if (!response.ok) {
+           throw new Error(`HTTP error! status: ${response.status}`);
+       }
+
+       const data = await response.json();
+       console.log(7777, data);
+       // Validate response
+       // if (!Array.isArray(data)) {
+       //     throw new Error("Invalid response format");
+       // }
+       console.log(999999, data as SearchItem[])
+       return data as SearchItem[];
+   } catch (error) {
+       return rejectWithValue(
+           error instanceof Error ? error.message : "Unknown error"
+       );
+   }
+}
+);
+
 export const fetchSearchResults = createAsyncThunk<SearchItem[], SearchParams>(
    "countries/fetchSearchResult",
    async ({ searchValue }, { rejectWithValue }) => {
@@ -342,6 +413,36 @@ const userSlice = createSlice({
           state.search.loading = false;
           state.search.error = action.error.message || "Failed to fetch countries";      
       })
+      .addCase(fetchSearchResultsByRegion.pending, (state)=>{
+        state.search.loading = true;
+        state.search.error = null
+     })
+     .addCase(fetchSearchResultsByRegion.fulfilled, (state, action: PayloadAction<SearchItem[]>) =>{
+       console.log(88888, action.payload);
+        state.search.loading = false;
+        state.search.countries = action.payload;
+
+     })
+     .addCase(fetchSearchResultsByRegion.rejected, (state, action) => {
+       console.log(888881, action.payload);
+         state.search.loading = false;
+         state.search.error = action.error.message || "Failed to fetch countries";      
+     })
+     .addCase(fetchSearchResultsByCapital.pending, (state)=>{
+      state.search.loading = true;
+      state.search.error = null
+   })
+   .addCase(fetchSearchResultsByCapital.fulfilled, (state, action: PayloadAction<SearchItem[]>) =>{
+     console.log(88888, action.payload);
+      state.search.loading = false;
+      state.search.countries = action.payload;
+
+   })
+   .addCase(fetchSearchResultsByCapital.rejected, (state, action) => {
+     console.log(888881, action.payload);
+       state.search.loading = false;
+       state.search.error = action.error.message || "Failed to fetch countries";      
+   })
   },
 });
 

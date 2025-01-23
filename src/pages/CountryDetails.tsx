@@ -7,8 +7,8 @@ const CountryDetails : React.FC = ({countryDetails}) =>{
          <h2>Country Information!</h2>
          <p><strong>Name:</strong> {countryDetails && countryDetails.name.common}</p>
          <p><strong>Official Name:</strong> {countryDetails && countryDetails.name.official}</p>
-         <p><strong>Alt Spellings: </strong>{countryDetails && countryDetails.altSpellings.map((item :string)=><span>{item+", "}</span>)}</p>
-         <p><strong>Borders: </strong>{countryDetails && countryDetails.borders.map((item :string)=><span>{item+", "}</span>)}</p>
+         <p><strong>Alt Spellings: </strong>{countryDetails && countryDetails.altSpellings.map((item :string, index:number)=><span key={index}>{item+", "}</span>)}</p>
+         <p><strong>Borders: </strong>{countryDetails && countryDetails.borders.map((item :string, index:number)=><span key={index}>{item+", "}</span>)}</p>
          <p><strong>Capital:</strong>{countryDetails && countryDetails.capital}</p>
          <p><strong>Flags:</strong></p>
          <img src={countryDetails && countryDetails.flags.svg} height="128px" alt="indian-flag"/>

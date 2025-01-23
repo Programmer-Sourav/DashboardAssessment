@@ -1,7 +1,7 @@
 import "./scrollcontainer.css"
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchCountries } from "../redux/userSlice";
+import { fetchCountries, fetchSearchResults } from "../redux/userSlice";
 import { AppDispatch, RootState } from "../redux/store";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
@@ -15,10 +15,9 @@ const CountriesList : React.FC = () =>{
     const dispatch = useDispatch<AppDispatch>();
     const [startIndex, setStartIndex] = useState<number>(1)
     const [endIndex, setEndIndex] = useState<number>(5);
-    const [searchValue, setSearchValue] = useState<string>("");
     const [filterValue, setFilterValue] = useState<string>("")
     const [filteredValue, setFilteredValue] = useState<any[]>([]); 
-    const [selectedValue, setSelectedValue] = useState<string>("")
+  
 
 
     
@@ -74,9 +73,7 @@ console.log(5555, filteredValue)
     const onFilterChange = (e : React.ChangeEvent<HTMLInputElement>) =>{
       setFilterValue(e.target.value)
     }
-    const onSearchChange = (e : React.ChangeEvent<HTMLInputElement>) =>{
-      setSearchValue(e.target.value)
-    }
+ 
     console.log(555444, filteredValue);
 
     const filterOnButtonClick = () =>{
@@ -89,19 +86,14 @@ console.log(5555, filteredValue)
         setFilteredValue(updatedData);
       }
     }
+
+  
+
     return(
     <>
     <div>
-    <label>Search By Name or Capital: </label>
-    <input type="search" value={searchValue} placeholder="Search by capital... " onChange={(e)=>{onSearchChange(e)}}/>
-    <select value={selectedValue} onChange={(e)=>{onSelectValueChange()}}>
-      <option value="name">By Name</option>
-      <option value="capital">By Capital</option>
-    </select>
-    </div>
-    <div>
-    <label>Filter By Region and Timezone: </label>
-    <input type="search" value={filterValue} placeholder="Filter by region and timezone... " onChange={(e)=>{onFilterChange(e)}}/>
+    <label>Filter By Region: </label>
+    <input type="search" value={filterValue} placeholder="Filter by region... " onChange={(e)=>{onFilterChange(e)}} className="searchbox"/>
     <button onClick={()=>{filterOnButtonClick()}}>Filter</button>
     </div>
     <div className="scroll-container"> 
