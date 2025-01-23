@@ -1,4 +1,5 @@
 # React + TypeScript + Vite
+This project can be run on localhost. 
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
