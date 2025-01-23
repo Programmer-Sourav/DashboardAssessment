@@ -23,6 +23,7 @@ const CountriesList : React.FC = () =>{
     
  const startIndexRef = useRef(startIndex);
  const endIndexRef = useRef(endIndex);
+ const length = countries.countries.length;
 
  useEffect(() => {
    startIndexRef.current = startIndex;
@@ -56,7 +57,7 @@ const CountriesList : React.FC = () =>{
 
 
  useEffect(() => {
-  if (countries.countries && countries.countries.length) {
+  if (countries.countries && length) {
     // Filter out duplicate countries based on a unique key (like the country name or id)
     setFilteredValue((prevData) => {
       const newCountries = countries.countries.filter(
